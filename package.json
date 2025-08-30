@@ -1,0 +1,28 @@
+{
+  "name": "pp-back",
+  "version": "1.0.0",
+  "description": "backend for pptoño-barber proyect",
+  "homepage": "https://github.com/Dev-4ngel/Pp-back#readme",
+  "bugs": {
+    "url": "https://github.com/Dev-4ngel/Pp-back/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dev-4ngel/Pp-back.git"
+  },
+  "license": "ISC",
+  "author": "Dev-4ngel",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run dev"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "node": "^24.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "prisma": "^6.15.0"
+  }
+}
