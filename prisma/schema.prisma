@@ -1,0 +1,59 @@
+generator client {
+    provider      = "prisma-client-js"
+    binaryTargets = ["native", "windows", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model User {
+    PKI_user             Int         @id @default(autoincrement())
+    FC_name              String
+    FC_lastname          String
+    FC_email             String      @unique
+    FC_password          String
+    role                 Role        @default(Costumer)
+    FKI_appointment      Int
+    FKI_user_appointment Appointment @relation(fields: [FKI_appointment], references: [PKI_appointment])
+    FKI_sale             Int?
+    FKI_user_sale        Sale?       @relation(fields: [FKI_sale], references: [PKI_sale])
+}
+
+enum Role {
+    Admin
+    Costumer
+}
+
+model Haircut {
+    PKI_haircut             Int          @id @default(autoincrement())
+    FC_name                 String
+    FC_description          String
+    FN_price                Int
+    FKI_appointment         Int?
+    FKI_haircut_appointment Appointment? @relation(fields: [FKI_appointment], references: [PKI_appointment])
+}
+
+model Product {
+    PKI_product      Int    @id @default(autoincrement())
+    FC_name          String
+    FC_description   String
+    FN_price         Int
+    FN_quantity      Int
+    FKI_sale         Int?
+    FKI_product_Sale Sale?  @relation(fields: [FKI_sale], references: [PKI_sale])
+}
+
+model Appointment {
+    PKI_appointment Int       @id @default(autoincrement())
+    FD_schedule     DateTime  @default(now())
+    haircurts       Haircut[]
+    user            User[]
+}
+
+model Sale {
+    PKI_sale Int       @id @default(autoincrement())
+    user     User[]
+    product  Product[]
+}
